@@ -49,7 +49,7 @@ uv --version
 ### Clone the repository
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/biguscj7/pytorch-pysig
 cd pytorch-pysig
 ```
 
