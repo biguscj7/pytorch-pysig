@@ -1,4 +1,4 @@
-# pytorch-pysig
+# pytorch-torchsig
 
 A ready-to-go Python project for working with [PyTorch](https://pytorch.org/) and [TorchSig](https://github.com/TorchDSP/torchsig), managed with [uv](https://docs.astral.sh/uv/). Includes Jupyter Lab for interactive notebooks.
 
@@ -49,7 +49,7 @@ uv --version
 ### Clone the repository
 
 ```bash
-git clone https://github.com/biguscj7/pytorch-pysig
+git clone https://github.com/biguscj7/pytorch-torchsig
 cd pytorch-pysig
 ```
 
@@ -94,6 +94,44 @@ Prefix any command with `uv run` to execute it inside the virtual environment:
 ```bash
 uv run python my_script.py
 ```
+
+## Docker
+
+As an alternative to installing Rust and uv locally, you can run the entire project in a Docker container. This is especially useful for running Jupyter Lab as a server accessible from other machines on your network.
+
+### Build the image
+
+```bash
+docker build -t pytorch-torchsig .
+```
+
+This will take several minutes the first time as it installs Rust, Python dependencies, and compiles TorchSig.
+
+### Run Jupyter Lab
+
+```bash
+docker run -p 8888:8888 pytorch-torchsig
+```
+
+Then open **http://localhost:8888** in your browser -- no password or token required.
+
+### Access from other machines on your network
+
+Jupyter Lab is accessible from any device on your local network at `http://<host-ip>:8888`. If the machine running Docker has a firewall enabled, you may need to allow the port:
+
+```bash
+sudo ufw allow 8888
+```
+
+### Mount local files for live editing
+
+To work on files from your host machine inside the container:
+
+```bash
+docker run -p 8888:8888 -v $(pwd):/app pytorch-torchsig
+```
+
+Any changes you make in Jupyter will be saved to your local directory.
 
 ## Troubleshooting
 
